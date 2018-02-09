@@ -194,6 +194,7 @@ class SFProfile:
 			print('Writing', self.filename, file=sys.stderr)
 			f = open(self.filename, 'w')
 		else:
+			print('Writing', self.filename + '.new', file=sys.stderr)
 			f = open(self.filename + '.new', 'w')
 		self.tree.write(f, encoding="unicode", xml_declaration=True, default_namespace=namespace)
 
@@ -270,14 +271,14 @@ def main():
 		i = 1
 		for f in ('READABLE', 'EDITABLE'):
 			if fps[i] not in ('true', 'false'):
-				print('READABLE should be true or false.', file=sys.stderr)
+				print(f, 'should be true or false.', file=sys.stderr)
 				return
 			i += 1
 	for obj in args.objectPermissions:
 		i = 1
 		for f in ('READ', 'CREATE', 'EDIT', 'DELETE', 'VIEWALL', 'MODIFYALL'):
-			if fps[i] not in ('true', 'false'):
-				print('READABLE should be true or false.', file=sys.stderr)
+			if obj[i] not in ('true', 'false'):
+				print(f, 'should be true or false.', file=sys.stderr)
 				return
 			i += 1
 
